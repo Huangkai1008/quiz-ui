@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Pong, PingService} from 'src/app/services/ping.service';
 
 @Component({
   selector: 'app-ping',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ping.component.less']
 })
 export class PingComponent implements OnInit {
+  pong: Pong;
 
-  constructor() { }
+  constructor(
+    private pingService: PingService
+  ) {
+  }
 
   ngOnInit() {
+    this.getPong();
+  }
+
+  getPong(): void {
+    this.pingService.getPong()
+      .subscribe(pong => this.pong = pong);
   }
 
 }
